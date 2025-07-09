@@ -43,7 +43,7 @@ export default function ContactSection() {
         setError(data.error || "Failed to send message.");
       }
     } catch (err) {
-      setError("Failed to send message.");
+      setError("Failed to send message." + err);
     } finally {
       setLoading(false);
     }
