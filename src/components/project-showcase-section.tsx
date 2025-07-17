@@ -26,7 +26,7 @@ const projects = [
     description: "A Website for searching the latest movies and TV-shows.",
     tech: ["React", "Next.js", "TailwindCSS", "TMDB API", "Firebase"],
     github: "https://github.com/Jayzumen/CineScope",
-    demo: "https://cinescope.vercel.app/",
+    demo: "https://cinescope-jn.netlify.app/",
     image: "/cinescope.jpg",
   },
   {
