@@ -13,13 +13,13 @@ import Image from "next/image";
 
 const projects = [
   {
-    title: "CarRental",
+    title: "MindFlux",
     description:
-      "This is a car rental website built with Next.js, TypeScript and Tailwind.",
-    tech: ["Next.js", "TypeScript", "TailwindCSS", "Prisma", "PostgreSQL"],
-    github: "https://github.com/Jayzumen/CarRental",
-    demo: "https://car-rental-jayzumen.vercel.app/",
-    image: "/carrental.jpg",
+      "A finance tracker website built with Next.js, TypeScript and Tailwind",
+    tech: ["Next.js", "TypeScript", "TailwindCSS", "Firebase", "Shadcn"],
+    github: "https://github.com/Jayzumen/MintFlux",
+    demo: "https://mintflux.netlify.app/",
+    image: "/mintflux.jpg",
   },
   {
     title: "CineScope",
@@ -30,13 +30,13 @@ const projects = [
     image: "/cinescope.jpg",
   },
   {
-    title: "Foodel",
+    title: "CarRental",
     description:
-      "A food Delivery Website. Built with Next.js, TypeScript and Stripe.",
-    tech: ["Next.js", "TypeScript", "TailwindCSS", "Stripe", "Prisma", "MySQL"],
-    github: "https://github.com/Jayzumen/Foodel",
-    demo: "https://foodel-jn.vercel.app/",
-    image: "/foodel.jpg",
+      "This is a car rental website built with Next.js, TypeScript and Tailwind.",
+    tech: ["Next.js", "TypeScript", "TailwindCSS", "Prisma", "PostgreSQL"],
+    github: "https://github.com/Jayzumen/CarRental",
+    demo: "https://car-rental-jayzumen.vercel.app/",
+    image: "/carrental.jpg",
   },
   {
     title: "Pokefans",
