@@ -1,104 +1,52 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import SectionHeading from "./section-heading";
+import ContactForm from "./contact-form";
+import { socialLinks } from "@/lib/site";
 
 export default function ContactSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const observer = new window.IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.2 },
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
-    setSuccess(null);
-    setError(null);
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
-    try {
-      const res = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
-      if (res.ok) {
-        setSuccess("Message sent successfully!");
-        form.reset();
-      } else {
-        const data = await res.json();
-        setError(data.error || "Failed to send message.");
-      }
-    } catch (err) {
-      setError("Failed to send message." + err);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
     <section
       id="contact"
-      className="bg-background py-16"
       aria-label="Contact section"
+      className="bg-muted/40 border-t py-24 md:py-32"
     >
-      <div
-        ref={ref}
-        className={`mx-auto max-w-xl px-4 transition-opacity duration-1000 ${visible ? "animate-fade-in opacity-100" : "opacity-0"}`}
-      >
-        <h2 className="mb-8 text-center text-3xl font-semibold">Contact</h2>
-        <form
-          className="flex flex-col gap-6"
-          autoComplete="off"
-          aria-label="Contact form"
-          onSubmit={handleSubmit}
-        >
-          <label className="flex flex-col gap-2">
-            <span className="text-base font-medium">Name</span>
-            <Input name="name" type="text" required placeholder="Your name" />
-          </label>
-          <label className="flex flex-col gap-2">
-            <span className="text-base font-medium">Email</span>
-            <Input
-              name="email"
-              type="email"
-              required
-              placeholder="you@example.com"
-            />
-          </label>
-          <label className="flex flex-col gap-2">
-            <span className="text-base font-medium">Message</span>
-            <textarea
-              name="message"
-              required
-              placeholder="Your message"
-              className="border-input focus-visible:border-ring focus-visible:ring-ring/50 min-h-[120px] rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-colors outline-none focus-visible:ring-[3px]"
-            />
-          </label>
-          <Button
-            type="submit"
-            size="lg"
-            className="self-end"
-            disabled={loading}
-          >
-            {loading ? "Sending..." : "Send Message"}
-          </Button>
-          {success && <p className="mt-2 text-sm text-green-600">{success}</p>}
-          {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
-        </form>
+      <div className="container-page grid gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16 lg:gap-24">
+        <div>
+          <SectionHeading
+            index="04"
+            label="Contact"
+            title="Contact"
+            className="mb-8 md:mb-8"
+          />
+          <ul className="reveal flex flex-col gap-3">
+            <li>
+              <a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-card hover:border-foreground/20 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium shadow-xs transition-colors"
+              >
+                <FaLinkedin className="size-5 text-[#0A66C2]" aria-hidden />
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a
+                href={socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-card hover:border-foreground/20 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium shadow-xs transition-colors"
+              >
+                <FaGithub className="size-5" aria-hidden />
+                GitHub
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div className="reveal bg-card rounded-2xl border p-6 shadow-sm md:p-8">
+          <ContactForm />
+        </div>
       </div>
     </section>
   );

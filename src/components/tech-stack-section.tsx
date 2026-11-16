@@ -1,5 +1,3 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
 import {
   SiNextdotjs,
   SiTypescript,
@@ -12,57 +10,45 @@ import {
   SiPostgresql,
   SiJavascript,
 } from "react-icons/si";
+import SectionHeading from "./section-heading";
 
 const techStack = [
-  { name: "JavaScript", icon: SiJavascript },
-  { name: "TypeScript", icon: SiTypescript },
-  { name: "React", icon: SiReact },
-  { name: "Next.js", icon: SiNextdotjs },
-  { name: "TailwindCSS", icon: SiTailwindcss },
-  { name: "ShadCN UI", icon: SiShadcnui },
-  { name: "MySQL", icon: SiMysql },
-  { name: "PostgreSQL", icon: SiPostgresql },
-  { name: "Prisma", icon: SiPrisma },
-  { name: "PHP", icon: SiPhp },
+  { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+  { name: "React", icon: SiReact, color: "#61DAFB" },
+  { name: "Next.js", icon: SiNextdotjs, color: "currentColor" },
+  { name: "TailwindCSS", icon: SiTailwindcss, color: "#06B6D4" },
+  { name: "ShadCN UI", icon: SiShadcnui, color: "currentColor" },
+  { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+  { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
+  { name: "Prisma", icon: SiPrisma, color: "currentColor" },
+  { name: "PHP", icon: SiPhp, color: "#777BB4" },
 ];
 
 export default function TechStackSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new window.IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.2 },
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section
       id="tech"
-      className="bg-background py-16"
       aria-label="Tech stack section"
+      className="bg-muted/40 border-y py-24 md:py-32"
     >
-      <div className="mx-auto max-w-4xl px-4">
-        <h2 className="mb-8 text-center text-3xl font-semibold">Tech Stack</h2>
-        <div
-          ref={ref}
-          className={`grid grid-cols-2 items-center justify-center gap-8 transition-opacity duration-1000 sm:grid-cols-3 md:grid-cols-5 ${visible ? "animate-fade-in opacity-100" : "opacity-0"}`}
-        >
-          {techStack.map((tech) => (
-            <div
-              key={tech.name}
-              className="tech-hover flex flex-col items-center gap-2"
+      <div className="container-page">
+        <SectionHeading index="02" label="Tech" title="Tech Stack" />
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-5">
+          {techStack.map(({ name, icon: Icon, color }) => (
+            <li
+              key={name}
+              style={{ "--tech-color": color } as React.CSSProperties}
+              className="reveal group bg-card hover:border-foreground/20 flex flex-col items-center gap-4 rounded-xl border px-4 py-8 shadow-xs transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
-              <tech.icon className="h-12 w-12" />
-              <span className="text-muted-foreground text-base">
-                {tech.name}
-              </span>
-            </div>
+              <Icon
+                aria-hidden
+                className="text-muted-foreground size-10 transition-colors duration-300 group-hover:text-(--tech-color)"
+              />
+              <span className="text-sm font-medium">{name}</span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

@@ -1,49 +1,47 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
-import { Card, CardContent } from "./ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import Image from "next/image";
+import portrait from "../../public/jn.jpg";
+import SectionHeading from "./section-heading";
 
 export default function AboutSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new window.IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.2 },
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section
       id="about"
-      className="bg-background flex w-full justify-center px-2 py-12 md:p-0"
       aria-label="About section"
+      className="border-t py-24 md:py-32"
     >
-      <Card
-        ref={ref}
-        className={`card-hover flex w-full max-w-3xl flex-col items-center gap-8 p-8 shadow-lg transition-opacity duration-1000 md:flex-row ${visible ? "animate-fade-in opacity-100" : "opacity-0"}`}
-      >
-        <Avatar className="size-32 md:size-60">
-          <AvatarImage
-            src="/jn.jpg"
-            alt="JN profile photo"
-            className="h-full w-full object-cover object-[50%_5%]"
+      <div className="container-page grid items-center gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16 lg:gap-24">
+        <div className="reveal relative mx-auto w-full max-w-sm md:max-w-none">
+          <div
+            aria-hidden
+            className="border-brand/30 absolute -inset-3 -z-10 translate-x-4 translate-y-4 rounded-3xl border"
           />
-          <AvatarFallback>JN</AvatarFallback>
-        </Avatar>
-        <CardContent className="flex-1 text-center md:text-left">
-          <h2 className="mb-2 text-3xl font-semibold">About Me</h2>
-          <p className="text-muted-foreground text-lg">
+          <div className="bg-muted relative aspect-4/5 overflow-hidden rounded-2xl border shadow-xl">
+            <Image
+              src={portrait}
+              alt="JN profile photo"
+              fill
+              placeholder="blur"
+              sizes="(min-width: 1152px) 420px, (min-width: 768px) 40vw, 384px"
+              className="object-cover object-[50%_15%]"
+            />
+          </div>
+        </div>
+
+        <div>
+          <SectionHeading
+            index="01"
+            label="About"
+            title="About Me"
+            className="mb-8 md:mb-8"
+          />
+          <p className="reveal text-muted-foreground text-lg leading-relaxed text-pretty md:text-xl md:leading-relaxed">
             I’m Jan-Niklas, a passionate web developer specializing in building
             fast, accessible, and beautiful web applications with modern
             technologies. I love crafting seamless user experiences and elegant
             interfaces.
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </section>
   );
 }

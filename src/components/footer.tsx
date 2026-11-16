@@ -1,57 +1,64 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { navLinks, socialLinks } from "@/lib/site";
 
-const footerLinks = [
-  { label: "Home", href: "#hero" },
-  { label: "About", href: "#about" },
-  { label: "Tech", href: "#tech" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
-];
-
-const socialLinks = [
+const socials = [
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/jan-niklas-reinhardt/",
-    icon: <FaLinkedin className="h-5 w-5" />,
+    href: socialLinks.linkedin,
+    icon: <FaLinkedin className="size-5" />,
   },
   {
     label: "GitHub",
-    href: "https://github.com/Jayzumen",
-    icon: <FaGithub className="h-5 w-5" />,
+    href: socialLinks.github,
+    icon: <FaGithub className="size-5" />,
   },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-background/80 border-border mt-16 border-t shadow-inner">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 md:flex-row">
-        <div className="flex flex-wrap justify-center gap-4">
-          {footerLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-muted-foreground hover:text-primary px-2 text-base font-medium transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-        <div className="flex items-center gap-4">
-          {socialLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={link.label}
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              {link.icon}
-            </a>
-          ))}
-        </div>
-        <div className="text-muted-foreground text-center text-xs md:text-right">
-          © {new Date().getFullYear()} JN. All rights reserved.
+    <footer className="border-t">
+      <div className="container-page flex flex-col gap-8 py-10 md:flex-row md:items-center md:justify-between">
+        <a
+          href="#hero"
+          aria-label="JN – back to top"
+          className="bg-primary text-primary-foreground grid size-8 place-items-center self-center rounded-lg font-mono text-sm md:self-auto"
+        >
+          JN
+        </a>
+
+        <nav aria-label="Footer">
+          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="flex flex-col items-center gap-4 md:items-end">
+          <div className="flex items-center gap-2">
+            {socials.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+                className="text-muted-foreground hover:text-foreground hover:bg-accent rounded-full p-2 transition-colors"
+              >
+                {link.icon}
+              </a>
+            ))}
+          </div>
+          <p className="text-muted-foreground text-xs">
+            © {new Date().getFullYear()} JN. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
