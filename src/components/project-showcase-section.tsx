@@ -41,7 +41,7 @@ const projects: Project[] = [
       "This is a car rental website built with Next.js, TypeScript and Tailwind.",
     tech: ["Next.js", "TypeScript", "TailwindCSS", "Prisma", "PostgreSQL"],
     github: "https://github.com/Jayzumen/CarRental",
-    demo: "https://car-rental-jayzumen.vercel.app/",
+    demo: "https://car-rental-jn.vercel.app/",
     image: carrental,
   },
   {
